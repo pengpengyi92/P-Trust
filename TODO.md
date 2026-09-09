@@ -6,9 +6,9 @@
 - [x] Durable job pipeline, retry limits and visible failure states.
 - [x] Functional report UI, permissions, trajectory, coverage and exports.
 - [x] Seven fixed synthetic fixtures and deterministic regression tests.
-- [ ] Verify local Worker persistence, desktop/mobile UI and keyboard operation.
-- [ ] Publish public repository, verify CI and deploy Cloudflare.
-- [ ] Scan the published P Trust commit and retain an honest self-inspection report.
+- [x] Verify persisted production job/report, desktop/mobile UI and keyboard operation.
+- [x] Publish public repository, verify CI and deploy Cloudflare.
+- [x] Scan the published P Trust commit and retain an honest self-inspection report (67/D, 16/27 eligible files).
 
 ## P1: Research Quality
 

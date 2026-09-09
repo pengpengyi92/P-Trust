@@ -2,6 +2,8 @@
 
 **Evidence before autonomy.** A research-driven, static inspection tool for public GitHub repositories and agents.
 
+[Open P Trust](https://pengyi-p-trust.pengpengyi92.workers.dev/) · [First public self-inspection: 67/D](docs/reports/self-inspection-2026-09-09.md)
+
 P Trust asks: what can this code do, what keeps it in bounds, and what evidence supports that conclusion?
 
 ## v0.1

@@ -51,7 +51,8 @@ export async function advance(
   } else if (job.stage === "tree" && work) {
     const tree = await reader.tree(job.ref, work.snapshot.tree_sha);
     const selection = selectFiles(tree.entries);
-    work.snapshot.tree = tree.entries.slice(0, 20_000);
+    // Retain only selected entries; the full bounded tree is not needed after selection.
+    work.snapshot.tree = selection.selected;
     work.selected = selection.selected;
     work.snapshot.coverage = {
       ...work.snapshot.coverage,

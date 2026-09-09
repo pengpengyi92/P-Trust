@@ -158,6 +158,15 @@ describe("evidence and trust boundaries", () => {
     f.files = [];
     f.coverage.fetched_files = 0;
     expect((await scanSnapshot(f, "empty")).grade).toBe("INSUFFICIENT");
+    expect((await scanSnapshot(f, "empty")).confidence).toBe(0);
+  });
+  it('exposes non-agent classification evidence and parses manifest keys structurally', async () => {
+    const f = fixtureSnapshot('weak-ci-project');
+    expect((await scanSnapshot(f, 'c')).classification.evidence.length).toBeGreaterThan(0);
+    f.files.push({ path: 'package.json', sha: 'a'.repeat(40), text: JSON.stringify({ note: '"exports": "fake"' }) });
+    expect((await scanSnapshot(f, 'c')).classification.kind).toBe('software');
+    f.files.at(-1)!.text = JSON.stringify({ exports: './index.js' });
+    expect((await scanSnapshot(f, 'c')).classification.kind).toBe('library');
   });
   it("redacts token and email patterns", () => {
     expect(

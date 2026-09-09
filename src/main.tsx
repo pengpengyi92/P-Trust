@@ -432,7 +432,7 @@ function App() {
             </p>
             <div className="dimensions">
               {report.dimensions.map((d) => (
-                <details key={d.dimension}>
+                <details key={d.dimension} name="dimension-breakdown">
                   <summary>
                     <span>{d.dimension}</span>
                     <b>{d.applicable ? (d.score ?? "N/A") : "N/A"}</b>
@@ -464,6 +464,14 @@ function App() {
                     role="tab"
                     aria-selected={t === tab}
                     aria-controls="report-panel"
+                    tabIndex={t === tab ? 0 : -1}
+                    onKeyDown={(e) => {
+                      const views = ['Findings', 'Permissions', 'Trajectory', 'Coverage'];
+                      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+                      e.preventDefault();
+                      const next = e.key === 'Home' ? views[0] : e.key === 'End' ? views[3] : views[(views.indexOf(t) + (e.key === 'ArrowRight' ? 1 : 3)) % 4];
+                      setTab(next); document.getElementById(`tab-${next}`)?.focus();
+                    }}
                     onClick={() => setTab(t)}
                   >
                     {t}
@@ -570,6 +578,7 @@ function App() {
                 <div className="coverage">
                   <h3>What this inspection can establish</h3>
                   <p>{report.classification.method}</p>
+                  <Proof items={report.classification.evidence} />
                   <ul>
                     {report.warnings.map((w) => (
                       <li key={w}>{w}</li>

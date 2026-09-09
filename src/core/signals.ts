@@ -205,23 +205,31 @@ export function classify(
   signals: Signal[],
 ): Classification {
   const agent = signals.filter((s) => s.kind === "agent_call");
-  const isLibrary = repo.files.some(
-    (f) => f.path === "package.json" && /"(?:exports|main)"\s*:/.test(f.text),
-  );
-  const code = repo.files.some((f) => /\.(py|[cm]?jsx?|tsx?)$/.test(f.path));
+  const library = repo.files.find((file) => {
+    if (file.path !== "package.json") return false;
+    try {
+      const manifest: unknown = JSON.parse(file.text);
+      return manifest !== null && typeof manifest === "object" && !Array.isArray(manifest) &&
+        (Object.hasOwn(manifest, "exports") || Object.hasOwn(manifest, "main"));
+    } catch { return false; }
+  });
+  const code = repo.files.find((f) => /\.(py|[cm]?jsx?|tsx?)$/.test(f.path));
+  const research = repo.files.find((f) => /research|paper/i.test(f.path));
+  const supporting = library || code || research;
+  const supportOffset = library ? Math.max(0, library.text.search(/"(?:exports|main)"\s*:/)) : 0;
   return {
     kind: agent.length
       ? "agentic"
-      : isLibrary
+      : library
         ? "library"
         : code
           ? "software"
-          : repo.files.some((f) => /research|paper/i.test(f.path))
+          : research
             ? "research"
             : "unknown",
     confidence: agent.length ? 0.7 : code ? 0.55 : 0.25,
-    evidence: agent.map((s) => s.evidence).slice(0, 5),
+    evidence: agent.length ? agent.map((s) => s.evidence).slice(0, 5) : supporting ? [evidence(repo, supporting, supportOffset, supportOffset + 100)] : [],
     method:
-      "Static call-name and manifest heuristic, not a runtime or semantic classification. Ambiguous repositories may be misclassified.",
+      "Static call-name, parsed manifest-key and source-filename heuristic, not a runtime or semantic classification. Non-agent evidence identifies the supporting file, not a proof of behavior; no match yields unknown. Ambiguous repositories may be misclassified.",
   };
 }

@@ -1,0 +1,1102 @@
+{
+  "id": "7ab322398db09ccd35482fc784829a06c8cc49993619bcb81463ed0a0b26f847",
+  "version": "0.1.0",
+  "policy": "static-evidence-2026-09-09.1",
+  "repository": {
+    "ref": {
+      "owner": "pengpengyi92",
+      "name": "P-Trust",
+      "url": "https://github.com/pengpengyi92/P-Trust"
+    },
+    "commit_sha": "2925a9c3e6b51aa3bd4b293910549ccdb78a69c9",
+    "tree_sha": "1bf128aa738c52bd0a657a160f77d6d814da2a9d",
+    "description": "Evidence before autonomy: bounded static inspection of public repositories and agents, with transparent trust scores and source evidence.",
+    "coverage": {
+      "tree_entries": 51,
+      "eligible_files": 27,
+      "fetched_files": 16,
+      "bytes": 50372,
+      "truncated_tree": false,
+      "skipped": [
+        {
+          "path": ".env.example",
+          "reason": "sensitive filename"
+        },
+        {
+          "path": ".gitattributes",
+          "reason": "unsupported or generated file"
+        },
+        {
+          "path": ".gitignore",
+          "reason": "unsupported or generated file"
+        },
+        {
+          "path": "LICENSE",
+          "reason": "unsupported or generated file"
+        },
+        {
+          "path": "index.html",
+          "reason": "unsupported or generated file"
+        },
+        {
+          "path": "package-lock.json",
+          "reason": "file size limit"
+        },
+        {
+          "path": "public/trust-researcher.png",
+          "reason": "file size limit"
+        },
+        {
+          "path": "src/fixtures/index.ts",
+          "reason": "excluded path"
+        },
+        {
+          "path": "src/main.tsx",
+          "reason": "file size limit"
+        },
+        {
+          "path": "src/styles.css",
+          "reason": "unsupported or generated file"
+        },
+        {
+          "path": "wrangler.jsonc",
+          "reason": "unsupported or generated file"
+        }
+      ]
+    },
+    "captured_at": "2026-09-09T03:56:25.565Z",
+    "source": "github"
+  },
+  "classification": {
+    "kind": "software",
+    "confidence": 0.55,
+    "evidence": [],
+    "method": "Static call-name and manifest heuristic, not a runtime or semantic classification. Ambiguous repositories may be misclassified."
+  },
+  "overall_score": 67,
+  "grade": "D",
+  "confidence": 0.54,
+  "dimensions": [
+    {
+      "dimension": "security",
+      "score": 100,
+      "applicable": true,
+      "confidence": 0.54,
+      "checks": [
+        {
+          "id": "validation",
+          "title": "Input validation call",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "src/worker.ts:46:46",
+              "path": "src/worker.ts",
+              "line_start": 46,
+              "line_end": 46,
+              "snippet": "    return row ? JSON.parse(row.value) : undefined;",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L46-L46"
+            },
+            {
+              "id": "src/worker.ts:82:82",
+              "path": "src/worker.ts",
+              "line_start": 82,
+              "line_end": 82,
+              "snippet": "    return job && Date.parse(job.expires_at) > Date.now() ? job : null;",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L82-L82"
+            },
+            {
+              "id": "src/worker.ts:92:92",
+              "path": "src/worker.ts",
+              "line_start": 92,
+              "line_end": 92,
+              "snippet": "    if (Date.now() >= Date.parse(job.expires_at)) {",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L92-L92"
+            },
+            {
+              "id": "src/worker.ts:97:97",
+              "path": "src/worker.ts",
+              "line_start": 97,
+              "line_end": 97,
+              "snippet": "      await this.ctx.storage.setAlarm(Date.parse(job.expires_at));",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L97-L97"
+            }
+          ],
+          "points": 40,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "ci_security",
+          "title": "Security check in CI",
+          "observed": true,
+          "evidence": [
+            {
+              "id": ".github/workflows/ci.yml:21:21",
+              "path": ".github/workflows/ci.yml",
+              "line_start": 21,
+              "line_end": 21,
+              "snippet": "      - run: npm audit --audit-level=high",
+              "blob_sha": "113679b361f3c9057555d3874cd23113c12022d7",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/.github/workflows/ci.yml#L21-L21"
+            }
+          ],
+          "points": 30,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "doc_limits",
+          "title": "Documented safety limitations",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "README.md:53:53",
+              "path": "README.md",
+              "line_start": 53,
+              "line_end": 53,
+              "snippet": "## Security And Limitations",
+              "blob_sha": "833e46d9678a2bac87e5fdc19745f6dceffb0be8",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/README.md#L53-L53"
+            },
+            {
+              "id": "SECURITY.md:1:1",
+              "path": "SECURITY.md",
+              "line_start": 1,
+              "line_end": 1,
+              "snippet": "# Security Policy",
+              "blob_sha": "f873cd8b9497d7a50fa09bfe4c2b519c7ea8f1c9",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/SECURITY.md#L1-L1"
+            },
+            {
+              "id": "SECURITY.md:7:7",
+              "path": "SECURITY.md",
+              "line_start": 7,
+              "line_end": 7,
+              "snippet": "## Limitations",
+              "blob_sha": "f873cd8b9497d7a50fa09bfe4c2b519c7ea8f1c9",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/SECURITY.md#L7-L7"
+            }
+          ],
+          "points": 30,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        }
+      ],
+      "findings": [],
+      "strengths": [
+        "Input validation call",
+        "Security check in CI",
+        "Documented safety limitations"
+      ],
+      "limitations": [
+        "Sampled static evidence only. Absence means not detected, not necessarily absent.",
+        "Named calls can be aliases, stubs or unused code; no control/data-flow proof."
+      ]
+    },
+    {
+      "dimension": "permissions",
+      "score": 30,
+      "applicable": true,
+      "confidence": 0.54,
+      "checks": [
+        {
+          "id": "permission_gate",
+          "title": "Explicit permission or approval check",
+          "observed": false,
+          "evidence": [],
+          "points": 70,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "doc_limits",
+          "title": "Documented permission boundary",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "README.md:53:53",
+              "path": "README.md",
+              "line_start": 53,
+              "line_end": 53,
+              "snippet": "## Security And Limitations",
+              "blob_sha": "833e46d9678a2bac87e5fdc19745f6dceffb0be8",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/README.md#L53-L53"
+            },
+            {
+              "id": "SECURITY.md:1:1",
+              "path": "SECURITY.md",
+              "line_start": 1,
+              "line_end": 1,
+              "snippet": "# Security Policy",
+              "blob_sha": "f873cd8b9497d7a50fa09bfe4c2b519c7ea8f1c9",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/SECURITY.md#L1-L1"
+            },
+            {
+              "id": "SECURITY.md:7:7",
+              "path": "SECURITY.md",
+              "line_start": 7,
+              "line_end": 7,
+              "snippet": "## Limitations",
+              "blob_sha": "f873cd8b9497d7a50fa09bfe4c2b519c7ea8f1c9",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/SECURITY.md#L7-L7"
+            }
+          ],
+          "points": 30,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        }
+      ],
+      "findings": [
+        {
+          "id": "permissions:filesystem_write",
+          "title": "Filesystem mutation capability",
+          "category": "permissions",
+          "severity": "medium",
+          "decision": "approval_required",
+          "summary": "3 static occurrence(s) found in the sampled files. This is a review signal, not proof of exploitation or malicious intent.",
+          "evidence": [
+            {
+              "id": "scripts/benchmark.ts:26:30",
+              "path": "scripts/benchmark.ts",
+              "line_start": 26,
+              "line_end": 30,
+              "snippet": "await writeFile(\n  \"output/benchmark.json\",\n  JSON.stringify(\n    {\n      measured_at: new Date().toISOString(),",
+              "blob_sha": "0adac59a0eacb755440d6f764aa8f96d1c0242ae",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/benchmark.ts#L26-L30"
+            },
+            {
+              "id": "scripts/self-scan.ts:24:24",
+              "path": "scripts/self-scan.ts",
+              "line_start": 24,
+              "line_end": 24,
+              "snippet": "    await writeFile('output/self-scan.json', JSON.stringify(report, null, 2));",
+              "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L24-L24"
+            },
+            {
+              "id": "scripts/self-scan.ts:25:25",
+              "path": "scripts/self-scan.ts",
+              "line_start": 25,
+              "line_end": 25,
+              "snippet": "    await writeFile('output/self-scan-job.json', JSON.stringify(job, null, 2));",
+              "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L25-L25"
+            }
+          ],
+          "why_it_matters": "A write or deletion API may affect persistent data.",
+          "recommendation": "Verify the resolved target stays inside an approved workspace, require approval for destructive operations, and test traversal and symlink cases.",
+          "confidence": 0.8
+        },
+        {
+          "id": "permissions:network",
+          "title": "Outbound network capability",
+          "category": "permissions",
+          "severity": "low",
+          "decision": "warn",
+          "summary": "4 static occurrence(s) found in the sampled files. This is a review signal, not proof of exploitation or malicious intent.",
+          "evidence": [
+            {
+              "id": "src/worker.ts:119:119",
+              "path": "src/worker.ts",
+              "line_start": 119,
+              "line_end": 119,
+              "snippet": "        return fetch(input, init);",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L119-L119"
+            },
+            {
+              "id": "scripts/self-scan.ts:6:6",
+              "path": "scripts/self-scan.ts",
+              "line_start": 6,
+              "line_end": 6,
+              "snippet": "const response = await fetch(`${base}/api/analyze`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ repository }) });",
+              "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L6-L6"
+            },
+            {
+              "id": "scripts/self-scan.ts:12:12",
+              "path": "scripts/self-scan.ts",
+              "line_start": 12,
+              "line_end": 12,
+              "snippet": "  const response = await fetch(`${base}/api/jobs/${start.jobId}`);",
+              "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L12-L12"
+            },
+            {
+              "id": "scripts/self-scan.ts:19:19",
+              "path": "scripts/self-scan.ts",
+              "line_start": 19,
+              "line_end": 19,
+              "snippet": "    const reportResponse = await fetch(`${base}/api/reports/${job.id}`);",
+              "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L19-L19"
+            }
+          ],
+          "why_it_matters": "Network calls cross a data boundary; static detection cannot establish destination safety.",
+          "recommendation": "Review host allowlists, redirects, credential scope and data redaction.",
+          "confidence": 0.8
+        }
+      ],
+      "strengths": [
+        "Documented permission boundary"
+      ],
+      "limitations": [
+        "Sampled static evidence only. Absence means not detected, not necessarily absent.",
+        "Named calls can be aliases, stubs or unused code; no control/data-flow proof."
+      ]
+    },
+    {
+      "dimension": "trajectory",
+      "score": null,
+      "applicable": false,
+      "confidence": 0.54,
+      "checks": [
+        {
+          "id": "agent_call",
+          "title": "Agent or tool invocation",
+          "observed": false,
+          "evidence": [],
+          "points": 20,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "state_write",
+          "title": "State persistence or transition call",
+          "observed": false,
+          "evidence": [],
+          "points": 40,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "permission_gate",
+          "title": "Approval checkpoint",
+          "observed": false,
+          "evidence": [],
+          "points": 20,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "trace",
+          "title": "Correlated event logging",
+          "observed": false,
+          "evidence": [],
+          "points": 20,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        }
+      ],
+      "findings": [],
+      "strengths": [],
+      "limitations": [
+        "Sampled static evidence only. Absence means not detected, not necessarily absent.",
+        "Named calls can be aliases, stubs or unused code; no control/data-flow proof.",
+        "Agent trajectory is not applicable under the current heuristic classification."
+      ]
+    },
+    {
+      "dimension": "observability",
+      "score": 50,
+      "applicable": true,
+      "confidence": 0.54,
+      "checks": [
+        {
+          "id": "logging",
+          "title": "Structured logging candidate",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "src/worker.ts:175:179",
+              "path": "src/worker.ts",
+              "line_start": 175,
+              "line_end": 179,
+              "snippet": "      console.log(\n        JSON.stringify({\n          event: \"scan_stage\",\n          job_id: job.id,\n          stage: job.stage,",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L175-L179"
+            },
+            {
+              "id": "src/worker.ts:210:214",
+              "path": "src/worker.ts",
+              "line_start": 210,
+              "line_end": 214,
+              "snippet": "      console.warn(\n        JSON.stringify({\n          event: \"scan_failure\",\n          job_id: job.id,\n          code: known.code,",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L210-L214"
+            },
+            {
+              "id": "scripts/self-scan.ts:9:9",
+              "path": "scripts/self-scan.ts",
+              "line_start": 9,
+              "line_end": 9,
+              "snippet": "console.log(`Job ${start.jobId}`);",
+              "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L9-L9"
+            },
+            {
+              "id": "scripts/self-scan.ts:16:16",
+              "path": "scripts/self-scan.ts",
+              "line_start": 16,
+              "line_end": 16,
+              "snippet": "  if (stage !== previous) { console.log(stage); previous = stage; }",
+              "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L16-L16"
+            }
+          ],
+          "points": 30,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "trace",
+          "title": "Trace or request identifier",
+          "observed": false,
+          "evidence": [],
+          "points": 50,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "exception_handling",
+          "title": "Exception handling syntax",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "src/worker.ts:101:104",
+              "path": "src/worker.ts",
+              "line_start": 101,
+              "line_end": 104,
+              "snippet": "    try {\n      if (Date.now() - Date.parse(job.created_at) > 600_000)\n        throw new ScanError(\n          \"JOB_TIMEOUT\",",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L101-L104"
+            },
+            {
+              "id": "src/worker.ts:128:132",
+              "path": "src/worker.ts",
+              "line_start": 128,
+              "line_end": 132,
+              "snippet": "          try {\n            const result = await this.env.AI.run(\n              \"@cf/meta/llama-3.1-8b-instruct\",\n              {\n                messages: [",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L128-L132"
+            },
+            {
+              "id": "src/worker.ts:240:244",
+              "path": "src/worker.ts",
+              "line_start": 240,
+              "line_end": 244,
+              "snippet": "    try {\n      if (url.pathname === \"/api/health\")\n        return json({\n          status: \"ok\",\n          version: \"0.1.0\",",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L240-L244"
+            },
+            {
+              "id": "src/core/github.ts:53:57",
+              "path": "src/core/github.ts",
+              "line_start": 53,
+              "line_end": 57,
+              "snippet": "  try {\n    while (true) {\n      const { done, value } = await reader.read();\n      if (done) break;\n      bytes += value.byteLength;",
+              "blob_sha": "4f56dd515dd6a984bfa4be16228fec12d7caa787",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/core/github.ts#L53-L57"
+            }
+          ],
+          "points": 20,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        }
+      ],
+      "findings": [],
+      "strengths": [
+        "Structured logging candidate",
+        "Exception handling syntax"
+      ],
+      "limitations": [
+        "Sampled static evidence only. Absence means not detected, not necessarily absent.",
+        "Named calls can be aliases, stubs or unused code; no control/data-flow proof."
+      ]
+    },
+    {
+      "dimension": "ci",
+      "score": 60,
+      "applicable": true,
+      "confidence": 0.54,
+      "checks": [
+        {
+          "id": "ci_install",
+          "title": "Dependency installation",
+          "observed": true,
+          "evidence": [
+            {
+              "id": ".github/workflows/ci.yml:17:17",
+              "path": ".github/workflows/ci.yml",
+              "line_start": 17,
+              "line_end": 17,
+              "snippet": "      - run: npm ci --ignore-scripts",
+              "blob_sha": "113679b361f3c9057555d3874cd23113c12022d7",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/.github/workflows/ci.yml#L17-L17"
+            }
+          ],
+          "points": 20,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "ci_test",
+          "title": "Automated tests",
+          "observed": true,
+          "evidence": [
+            {
+              "id": ".github/workflows/ci.yml:34:34",
+              "path": ".github/workflows/ci.yml",
+              "line_start": 34,
+              "line_end": 34,
+              "snippet": "      - run: npm run test:browser",
+              "blob_sha": "113679b361f3c9057555d3874cd23113c12022d7",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/.github/workflows/ci.yml#L34-L34"
+            }
+          ],
+          "points": 40,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "ci_checks",
+          "title": "Type or lint checks",
+          "observed": false,
+          "evidence": [],
+          "points": 20,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "test_assert",
+          "title": "Assertions in source",
+          "observed": false,
+          "evidence": [],
+          "points": 20,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        }
+      ],
+      "findings": [],
+      "strengths": [
+        "Dependency installation",
+        "Automated tests"
+      ],
+      "limitations": [
+        "Sampled static evidence only. Absence means not detected, not necessarily absent.",
+        "Named calls can be aliases, stubs or unused code; no control/data-flow proof."
+      ]
+    },
+    {
+      "dimension": "recovery",
+      "score": 60,
+      "applicable": true,
+      "confidence": 0.54,
+      "checks": [
+        {
+          "id": "exception_handling",
+          "title": "Exception handling",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "src/worker.ts:101:104",
+              "path": "src/worker.ts",
+              "line_start": 101,
+              "line_end": 104,
+              "snippet": "    try {\n      if (Date.now() - Date.parse(job.created_at) > 600_000)\n        throw new ScanError(\n          \"JOB_TIMEOUT\",",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L101-L104"
+            },
+            {
+              "id": "src/worker.ts:128:132",
+              "path": "src/worker.ts",
+              "line_start": 128,
+              "line_end": 132,
+              "snippet": "          try {\n            const result = await this.env.AI.run(\n              \"@cf/meta/llama-3.1-8b-instruct\",\n              {\n                messages: [",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L128-L132"
+            },
+            {
+              "id": "src/worker.ts:240:244",
+              "path": "src/worker.ts",
+              "line_start": 240,
+              "line_end": 244,
+              "snippet": "    try {\n      if (url.pathname === \"/api/health\")\n        return json({\n          status: \"ok\",\n          version: \"0.1.0\",",
+              "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L240-L244"
+            },
+            {
+              "id": "src/core/github.ts:53:57",
+              "path": "src/core/github.ts",
+              "line_start": 53,
+              "line_end": 57,
+              "snippet": "  try {\n    while (true) {\n      const { done, value } = await reader.read();\n      if (done) break;\n      bytes += value.byteLength;",
+              "blob_sha": "4f56dd515dd6a984bfa4be16228fec12d7caa787",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/core/github.ts#L53-L57"
+            }
+          ],
+          "points": 30,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "timeout",
+          "title": "Explicit timeout",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "src/core/github.ts:79:79",
+              "path": "src/core/github.ts",
+              "line_start": 79,
+              "line_end": 79,
+              "snippet": "      signal: AbortSignal.timeout(LIMITS.timeoutMs),",
+              "blob_sha": "4f56dd515dd6a984bfa4be16228fec12d7caa787",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/core/github.ts#L79-L79"
+            }
+          ],
+          "points": 30,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "retry_bound",
+          "title": "Retry-count boundary",
+          "observed": false,
+          "evidence": [],
+          "points": 25,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "backoff",
+          "title": "Backoff or sleep call",
+          "observed": false,
+          "evidence": [],
+          "points": 15,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        }
+      ],
+      "findings": [
+        {
+          "id": "recovery:unbounded_loop",
+          "title": "Continuous loop needs exit-path review",
+          "category": "recovery",
+          "severity": "medium",
+          "decision": "warn",
+          "summary": "1 static occurrence(s) found in the sampled files. This is a review signal, not proof of exploitation or malicious intent.",
+          "evidence": [
+            {
+              "id": "src/core/github.ts:54:57",
+              "path": "src/core/github.ts",
+              "line_start": 54,
+              "line_end": 57,
+              "snippet": "    while (true) {\n      const { done, value } = await reader.read();\n      if (done) break;\n      bytes += value.byteLength;",
+              "blob_sha": "4f56dd515dd6a984bfa4be16228fec12d7caa787",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/core/github.ts#L54-L57"
+            }
+          ],
+          "why_it_matters": "A continuous loop may be intentional but termination and resource bounds are not proved.",
+          "recommendation": "Test cancellation, retry exhaustion and failure recovery; inspect control flow before treating this as a defect.",
+          "confidence": 0.8
+        }
+      ],
+      "strengths": [
+        "Exception handling",
+        "Explicit timeout"
+      ],
+      "limitations": [
+        "Sampled static evidence only. Absence means not detected, not necessarily absent.",
+        "Named calls can be aliases, stubs or unused code; no control/data-flow proof."
+      ]
+    },
+    {
+      "dimension": "documentation",
+      "score": 100,
+      "applicable": true,
+      "confidence": 0.54,
+      "checks": [
+        {
+          "id": "doc_usage",
+          "title": "Installation or usage section",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "README.md:18:18",
+              "path": "README.md",
+              "line_start": 18,
+              "line_end": 18,
+              "snippet": "## Quick Start",
+              "blob_sha": "833e46d9678a2bac87e5fdc19745f6dceffb0be8",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/README.md#L18-L18"
+            },
+            {
+              "id": "README.md:32:32",
+              "path": "README.md",
+              "line_start": 32,
+              "line_end": 32,
+              "snippet": "## Usage",
+              "blob_sha": "833e46d9678a2bac87e5fdc19745f6dceffb0be8",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/README.md#L32-L32"
+            }
+          ],
+          "points": 40,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "doc_limits",
+          "title": "Limitations or security section",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "README.md:53:53",
+              "path": "README.md",
+              "line_start": 53,
+              "line_end": 53,
+              "snippet": "## Security And Limitations",
+              "blob_sha": "833e46d9678a2bac87e5fdc19745f6dceffb0be8",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/README.md#L53-L53"
+            },
+            {
+              "id": "SECURITY.md:1:1",
+              "path": "SECURITY.md",
+              "line_start": 1,
+              "line_end": 1,
+              "snippet": "# Security Policy",
+              "blob_sha": "f873cd8b9497d7a50fa09bfe4c2b519c7ea8f1c9",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/SECURITY.md#L1-L1"
+            },
+            {
+              "id": "SECURITY.md:7:7",
+              "path": "SECURITY.md",
+              "line_start": 7,
+              "line_end": 7,
+              "snippet": "## Limitations",
+              "blob_sha": "f873cd8b9497d7a50fa09bfe4c2b519c7ea8f1c9",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/SECURITY.md#L7-L7"
+            }
+          ],
+          "points": 35,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        },
+        {
+          "id": "doc_architecture",
+          "title": "Architecture section",
+          "observed": true,
+          "evidence": [
+            {
+              "id": "README.md:38:38",
+              "path": "README.md",
+              "line_start": 38,
+              "line_end": 38,
+              "snippet": "## Architecture",
+              "blob_sha": "833e46d9678a2bac87e5fdc19745f6dceffb0be8",
+              "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/README.md#L38-L38"
+            }
+          ],
+          "points": 25,
+          "meaning": "Presence only; effectiveness, reachability and branch coverage remain unverified."
+        }
+      ],
+      "findings": [],
+      "strengths": [
+        "Installation or usage section",
+        "Limitations or security section",
+        "Architecture section"
+      ],
+      "limitations": [
+        "Sampled static evidence only. Absence means not detected, not necessarily absent.",
+        "Named calls can be aliases, stubs or unused code; no control/data-flow proof."
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "permissions:filesystem_write",
+      "title": "Filesystem mutation capability",
+      "category": "permissions",
+      "severity": "medium",
+      "decision": "approval_required",
+      "summary": "3 static occurrence(s) found in the sampled files. This is a review signal, not proof of exploitation or malicious intent.",
+      "evidence": [
+        {
+          "id": "scripts/benchmark.ts:26:30",
+          "path": "scripts/benchmark.ts",
+          "line_start": 26,
+          "line_end": 30,
+          "snippet": "await writeFile(\n  \"output/benchmark.json\",\n  JSON.stringify(\n    {\n      measured_at: new Date().toISOString(),",
+          "blob_sha": "0adac59a0eacb755440d6f764aa8f96d1c0242ae",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/benchmark.ts#L26-L30"
+        },
+        {
+          "id": "scripts/self-scan.ts:24:24",
+          "path": "scripts/self-scan.ts",
+          "line_start": 24,
+          "line_end": 24,
+          "snippet": "    await writeFile('output/self-scan.json', JSON.stringify(report, null, 2));",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L24-L24"
+        },
+        {
+          "id": "scripts/self-scan.ts:25:25",
+          "path": "scripts/self-scan.ts",
+          "line_start": 25,
+          "line_end": 25,
+          "snippet": "    await writeFile('output/self-scan-job.json', JSON.stringify(job, null, 2));",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L25-L25"
+        }
+      ],
+      "why_it_matters": "A write or deletion API may affect persistent data.",
+      "recommendation": "Verify the resolved target stays inside an approved workspace, require approval for destructive operations, and test traversal and symlink cases.",
+      "confidence": 0.8
+    },
+    {
+      "id": "permissions:network",
+      "title": "Outbound network capability",
+      "category": "permissions",
+      "severity": "low",
+      "decision": "warn",
+      "summary": "4 static occurrence(s) found in the sampled files. This is a review signal, not proof of exploitation or malicious intent.",
+      "evidence": [
+        {
+          "id": "src/worker.ts:119:119",
+          "path": "src/worker.ts",
+          "line_start": 119,
+          "line_end": 119,
+          "snippet": "        return fetch(input, init);",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L119-L119"
+        },
+        {
+          "id": "scripts/self-scan.ts:6:6",
+          "path": "scripts/self-scan.ts",
+          "line_start": 6,
+          "line_end": 6,
+          "snippet": "const response = await fetch(`${base}/api/analyze`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ repository }) });",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L6-L6"
+        },
+        {
+          "id": "scripts/self-scan.ts:12:12",
+          "path": "scripts/self-scan.ts",
+          "line_start": 12,
+          "line_end": 12,
+          "snippet": "  const response = await fetch(`${base}/api/jobs/${start.jobId}`);",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L12-L12"
+        },
+        {
+          "id": "scripts/self-scan.ts:19:19",
+          "path": "scripts/self-scan.ts",
+          "line_start": 19,
+          "line_end": 19,
+          "snippet": "    const reportResponse = await fetch(`${base}/api/reports/${job.id}`);",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L19-L19"
+        }
+      ],
+      "why_it_matters": "Network calls cross a data boundary; static detection cannot establish destination safety.",
+      "recommendation": "Review host allowlists, redirects, credential scope and data redaction.",
+      "confidence": 0.8
+    },
+    {
+      "id": "recovery:unbounded_loop",
+      "title": "Continuous loop needs exit-path review",
+      "category": "recovery",
+      "severity": "medium",
+      "decision": "warn",
+      "summary": "1 static occurrence(s) found in the sampled files. This is a review signal, not proof of exploitation or malicious intent.",
+      "evidence": [
+        {
+          "id": "src/core/github.ts:54:57",
+          "path": "src/core/github.ts",
+          "line_start": 54,
+          "line_end": 57,
+          "snippet": "    while (true) {\n      const { done, value } = await reader.read();\n      if (done) break;\n      bytes += value.byteLength;",
+          "blob_sha": "4f56dd515dd6a984bfa4be16228fec12d7caa787",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/core/github.ts#L54-L57"
+        }
+      ],
+      "why_it_matters": "A continuous loop may be intentional but termination and resource bounds are not proved.",
+      "recommendation": "Test cancellation, retry exhaustion and failure recovery; inspect control flow before treating this as a defect.",
+      "confidence": 0.8
+    }
+  ],
+  "permission_map": [
+    {
+      "capability": "network",
+      "status": "observed; review required",
+      "evidence": [
+        {
+          "id": "src/worker.ts:119:119",
+          "path": "src/worker.ts",
+          "line_start": 119,
+          "line_end": 119,
+          "snippet": "        return fetch(input, init);",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L119-L119"
+        },
+        {
+          "id": "scripts/self-scan.ts:6:6",
+          "path": "scripts/self-scan.ts",
+          "line_start": 6,
+          "line_end": 6,
+          "snippet": "const response = await fetch(`${base}/api/analyze`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ repository }) });",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L6-L6"
+        },
+        {
+          "id": "scripts/self-scan.ts:12:12",
+          "path": "scripts/self-scan.ts",
+          "line_start": 12,
+          "line_end": 12,
+          "snippet": "  const response = await fetch(`${base}/api/jobs/${start.jobId}`);",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L12-L12"
+        },
+        {
+          "id": "scripts/self-scan.ts:19:19",
+          "path": "scripts/self-scan.ts",
+          "line_start": 19,
+          "line_end": 19,
+          "snippet": "    const reportResponse = await fetch(`${base}/api/reports/${job.id}`);",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L19-L19"
+        }
+      ]
+    },
+    {
+      "capability": "shell",
+      "status": "not detected in sample",
+      "evidence": []
+    },
+    {
+      "capability": "filesystem_write",
+      "status": "observed; review required",
+      "evidence": [
+        {
+          "id": "scripts/benchmark.ts:26:30",
+          "path": "scripts/benchmark.ts",
+          "line_start": 26,
+          "line_end": 30,
+          "snippet": "await writeFile(\n  \"output/benchmark.json\",\n  JSON.stringify(\n    {\n      measured_at: new Date().toISOString(),",
+          "blob_sha": "0adac59a0eacb755440d6f764aa8f96d1c0242ae",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/benchmark.ts#L26-L30"
+        },
+        {
+          "id": "scripts/self-scan.ts:24:24",
+          "path": "scripts/self-scan.ts",
+          "line_start": 24,
+          "line_end": 24,
+          "snippet": "    await writeFile('output/self-scan.json', JSON.stringify(report, null, 2));",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L24-L24"
+        },
+        {
+          "id": "scripts/self-scan.ts:25:25",
+          "path": "scripts/self-scan.ts",
+          "line_start": 25,
+          "line_end": 25,
+          "snippet": "    await writeFile('output/self-scan-job.json', JSON.stringify(job, null, 2));",
+          "blob_sha": "680b1e323b977b12653fbeb43302dab2ed6c3cd0",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/scripts/self-scan.ts#L25-L25"
+        }
+      ]
+    },
+    {
+      "capability": "dynamic_eval",
+      "status": "not detected in sample",
+      "evidence": []
+    }
+  ],
+  "trajectory": [
+    {
+      "stage": "Input validation",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "id": "src/worker.ts:46:46",
+          "path": "src/worker.ts",
+          "line_start": 46,
+          "line_end": 46,
+          "snippet": "    return row ? JSON.parse(row.value) : undefined;",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L46-L46"
+        },
+        {
+          "id": "src/worker.ts:82:82",
+          "path": "src/worker.ts",
+          "line_start": 82,
+          "line_end": 82,
+          "snippet": "    return job && Date.parse(job.expires_at) > Date.now() ? job : null;",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L82-L82"
+        },
+        {
+          "id": "src/worker.ts:92:92",
+          "path": "src/worker.ts",
+          "line_start": 92,
+          "line_end": 92,
+          "snippet": "    if (Date.now() >= Date.parse(job.expires_at)) {",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L92-L92"
+        }
+      ]
+    },
+    {
+      "stage": "Tool invocation",
+      "status": "not_applicable",
+      "evidence": []
+    },
+    {
+      "stage": "Approval",
+      "status": "not_applicable",
+      "evidence": []
+    },
+    {
+      "stage": "State transition",
+      "status": "not_applicable",
+      "evidence": []
+    },
+    {
+      "stage": "Observation",
+      "status": "not_applicable",
+      "evidence": []
+    },
+    {
+      "stage": "Recovery",
+      "status": "not_applicable",
+      "evidence": [
+        {
+          "id": "src/worker.ts:101:104",
+          "path": "src/worker.ts",
+          "line_start": 101,
+          "line_end": 104,
+          "snippet": "    try {\n      if (Date.now() - Date.parse(job.created_at) > 600_000)\n        throw new ScanError(\n          \"JOB_TIMEOUT\",",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L101-L104"
+        },
+        {
+          "id": "src/worker.ts:128:132",
+          "path": "src/worker.ts",
+          "line_start": 128,
+          "line_end": 132,
+          "snippet": "          try {\n            const result = await this.env.AI.run(\n              \"@cf/meta/llama-3.1-8b-instruct\",\n              {\n                messages: [",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L128-L132"
+        },
+        {
+          "id": "src/worker.ts:240:244",
+          "path": "src/worker.ts",
+          "line_start": 240,
+          "line_end": 244,
+          "snippet": "    try {\n      if (url.pathname === \"/api/health\")\n        return json({\n          status: \"ok\",\n          version: \"0.1.0\",",
+          "blob_sha": "3bfbf3261853774a49351399e61dddf4a91e478c",
+          "source_url": "https://github.com/pengpengyi92/P-Trust/blob/2925a9c3e6b51aa3bd4b293910549ccdb78a69c9/src/worker.ts#L240-L244"
+        }
+      ]
+    }
+  ],
+  "interpretation": {
+    "status": "off",
+    "finding_order": [
+      "permissions:filesystem_write",
+      "permissions:network",
+      "recovery:unbounded_loop"
+    ],
+    "model": null,
+    "summary": "Deterministic evidence report. No model-generated claims.",
+    "limitation": "LLM interpretation is disabled by default. Static results do not prove runtime safety."
+  },
+  "created_at": "2026-09-09T03:56:33.871Z",
+  "disclaimer": "This is a heuristic evidence-coverage score, not a security certification, malware verdict, probability of safety, or authorization to execute.",
+  "warnings": [
+    "Partial file sample: undetected controls and risks may exist outside the sample.",
+    "No dependency resolution, runtime sandbox, interprocedural data flow or exploit validation in v0.1."
+  ]
+}
