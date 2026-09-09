@@ -54,7 +54,7 @@ export class AnalysisJob extends DurableObject<Env> {
   }
   async initialize(id: string, ref: RepoRef) {
     const existing = this.read<JobState>("job");
-    if (existing) {
+    if (existing && existing.status !== "failed") {
       if (!(await this.ctx.storage.getAlarm()))
         await this.ctx.storage.setAlarm(Date.now() + 100);
       return existing;
@@ -213,6 +213,8 @@ export class AnalysisJob extends DurableObject<Env> {
           job_id: job.id,
           code: known.code,
           attempt: job.attempt,
+          error_type: error instanceof Error ? error.name : typeof error,
+          error_detail: error instanceof Error ? error.message.slice(0, 240) : "unknown",
         }),
       );
       await this.ctx.storage.setAlarm(

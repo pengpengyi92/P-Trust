@@ -68,7 +68,7 @@ describe("public URL boundary", () => {
         true,
       );
       expect(new Headers(init?.headers).has("authorization")).toBe(false);
-      expect(init?.redirect).toBe("error");
+        expect(init?.redirect).toBe("manual");
       return new Response("{}", { status: 404 });
     });
     await expect(

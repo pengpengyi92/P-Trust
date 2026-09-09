@@ -75,7 +75,7 @@ export class GitHubReader {
     maxBytes = LIMITS.responseBytes,
   ): Promise<unknown> {
     const response = await this.transport(`https://api.github.com${path}`, {
-      redirect: "error",
+        redirect: "manual",
       signal: AbortSignal.timeout(LIMITS.timeoutMs),
       headers: {
         Accept: "application/vnd.github+json",
@@ -85,6 +85,8 @@ export class GitHubReader {
     });
     if (!response.ok) {
       await response.body?.cancel();
+      if (response.status >= 300 && response.status < 400)
+        throw new ScanError("REDIRECT_REJECTED", "GitHub redirects are not followed. Use the repository's current canonical URL.");
       if (response.status === 403 || response.status === 429)
         throw new ScanError(
           "UPSTREAM_RATE_LIMIT",

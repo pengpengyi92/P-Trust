@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npm run build && wrangler dev --port 8801 --inspector-port 9259",
+    "dev": "npm run build && wrangler dev --local --port 8801 --inspector-port 9259",
     "dev:web": "vite --host 127.0.0.1 --port 5199",
     "build": "vite build",
     "types": "wrangler types",

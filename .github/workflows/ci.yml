@@ -22,7 +22,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Start local Worker
         run: |
-          npx wrangler dev --port 8801 --inspector-port 9259 > /tmp/p-trust-worker.log 2>&1 &
+          npx wrangler dev --local --port 8801 --inspector-port 9259 > /tmp/p-trust-worker.log 2>&1 &
           for i in $(seq 1 40); do
             if curl --fail --silent http://127.0.0.1:8801/api/health; then exit 0; fi
             sleep 2
