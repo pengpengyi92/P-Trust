@@ -1,0 +1,34 @@
+name: Quality and regression
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+      - run: npm audit --audit-level=high
+      - run: npx playwright install --with-deps chromium
+      - name: Start local Worker
+        run: |
+          npx wrangler dev --port 8801 --inspector-port 9259 > /tmp/p-trust-worker.log 2>&1 &
+          for i in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:8801/api/health; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/p-trust-worker.log
+          exit 1
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+      - run: npm run test:browser

@@ -1,0 +1,51 @@
+{
+  "name": "p-trust",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && wrangler dev --port 8801 --inspector-port 9259",
+    "dev:web": "vite --host 127.0.0.1 --port 5199",
+    "build": "vite build",
+    "types": "wrangler types",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests scripts",
+    "test": "vitest run",
+    "test:browser": "playwright test",
+    "benchmark": "tsx scripts/benchmark.ts",
+    "check": "npm run types && npm run typecheck && npm run lint && npm test && npm run benchmark && npm run build",
+    "deploy": "npm run check && wrangler deploy",
+    "format": "prettier --write src tests scripts docs *.json *.jsonc *.ts *.md"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "overrides": {
+    "sharp": "0.35.4"
+  },
+  "dependencies": {
+    "@lezer/common": "1.5.2",
+    "@lezer/javascript": "1.5.4",
+    "@lezer/python": "1.1.19",
+    "lucide-react": "1.43.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.5.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@vitejs/plugin-react": "6.1.1",
+    "eslint": "10.10.0",
+    "prettier": "3.9.6",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0",
+    "vite": "8.2.2",
+    "vitest": "5.0.0",
+    "wrangler": "4.130.0"
+  }
+}
