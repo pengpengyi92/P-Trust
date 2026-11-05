@@ -80,7 +80,7 @@ curl http://127.0.0.1:8801/api/fixtures/over-permissioned-agent
 
 ### External AI safety research notes
 
-- [2026-11-05 · Fangcun AI: static inspection ↔ Agent runtime safety](docs/notes/2026-11-05_2344_FANGCUN_AI_AGENT_RUNTIME_SAFETY.md) · [Research log](docs/logs/2026-11-05_2344_FANGCUN_AI_RUNTIME_SAFETY_LOG.md). Public-source landscape note and uncalibrated evaluation protocol, **not** a deployed P-Trust runtime feature, security endorsement or independent replication.
+- [2026-11-06 · SkillWard pinned-code review](docs/reports/2026-11-06_skillward_pinned_source_audit.md) · [Source audit log](docs/logs/2026-11-06_skillward_source_audit_log.md) · [Synthetic, non-vendor evaluation harness](research/agent_runtime_eval/README.md). Fixed SHA `7e406b78dcc1`; 5 local unit tests passed; no third-party code or Docker executed.\n- [2026-11-05 · Fangcun AI: static inspection ↔ Agent runtime safety](docs/notes/2026-11-05_2344_FANGCUN_AI_AGENT_RUNTIME_SAFETY.md) · [Research log](docs/logs/2026-11-05_2344_FANGCUN_AI_RUNTIME_SAFETY_LOG.md). Public-source landscape note and uncalibrated evaluation protocol, **not** a deployed P-Trust runtime feature, security endorsement or independent replication.
 
 [Scoring protocol](docs/scoring.md) · [Architecture](docs/architecture.md) · [Benchmark card](BENCHMARK_CARD.md) · [Roadmap](TODO.md) · [Version log](docs/logs/v0.1.md)
 

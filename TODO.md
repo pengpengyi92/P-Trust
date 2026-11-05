@@ -27,5 +27,5 @@
 
 ## Research watch (2026-11-05; not committed product scope)
 
-- [ ] Read-only, pinned-commit examination of public SkillWard repo and external Agent runtime safety literature; record threat model, data provenance and benchmark limits in [Fangcun external note](docs/notes/2026-11-05_2344_FANGCUN_AI_AGENT_RUNTIME_SAFETY.md).
+- [x] First read-only, pinned-commit SkillWard source review (2026-11-06) and risk/evidence ledger in [pinned audit](docs/reports/2026-11-06_skillward_pinned_source_audit.md). No vendor code executed.\n- [x] Reproducible **synthetic-only** metrics smoke test with five passed unit tests; no empirical performance claim.\n- [ ] Review external Agent runtime safety literature and validate the pinned-code findings independently.
 - [ ] Develop independently labeled Agent trace and tool-interruption scenarios; report precision/recall, false blocks, latency, trace coverage and pre-effect prevention separately. No runtime protection is claimed in P-Trust v0.1.
