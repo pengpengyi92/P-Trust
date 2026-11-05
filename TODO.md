@@ -24,3 +24,8 @@
 - [ ] Opt-in isolated dynamic sandbox with a separate threat model and approval.
 - [ ] GitHub App integration, per-owner quota and authenticated private reports.
 - [ ] Interprocedural trajectory graphs, badges and continuous monitoring.
+
+## Research watch (2026-11-05; not committed product scope)
+
+- [ ] Read-only, pinned-commit examination of public SkillWard repo and external Agent runtime safety literature; record threat model, data provenance and benchmark limits in [Fangcun external note](docs/notes/2026-11-05_2344_FANGCUN_AI_AGENT_RUNTIME_SAFETY.md).
+- [ ] Develop independently labeled Agent trace and tool-interruption scenarios; report precision/recall, false blocks, latency, trace coverage and pre-effect prevention separately. No runtime protection is claimed in P-Trust v0.1.
